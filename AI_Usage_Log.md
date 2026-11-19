@@ -1,0 +1,13 @@
+# AI usage log
+
+## November 19 2026 — Codex
+
+User direction: choose an approved Project 2 topic and start a new project, with Eziz Bagshiyev as teammate. Sources: official Project 2 overview, team instructions, presentation questions, and additional requirements.
+
+Generated material: proposed FocusNFlow scope, six-screen preview, wireframe draft, proposal draft, architecture, test plan, and tentative ownership schedule. These are AI-assisted drafts for student review; they are not claimed as original unaided student work or as evidence of either member's completed implementation.
+
+Accepted in this preparation: the approved topic and undergraduate scope. Changed from a generic study timer: added room freshness, membership enforcement, conflict handling, server-authoritative shared timing, required Firebase services, baseline evaluation, and individual evidence requirements. Rejected: treating a local countdown or static occupancy screen as proof of a synchronized cloud feature.
+
+Verification: official requirement text was read live. Prototype navigation checks and static analysis are recorded in the preparation status. Firebase behavior and AI evaluation remain unverified. No student learning outcome, teammate contribution, peer test, metric, or signed statement has been invented.
+
+Student follow-up: both members must review the plan, understand their assigned code, independently implement or materially verify owned tasks, and add what they accepted, changed, tested, and learned as development proceeds.
