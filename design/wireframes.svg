@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600">
+<rect x="0" y="0" width="1200" height="1600" rx="0" fill="#eaece7" stroke="#eaece7"/>
+<text x="30" y="50" font-family="Arial,sans-serif" font-size="30" fill="#18342d">FocusNFlow</text>
+<text x="30" y="78" font-family="Arial,sans-serif" font-size="16" fill="#18342d">Six primary layouts · proposal draft · synthetic examples, not live records</text>
+<rect x="30" y="110" width="360" height="690" rx="24" fill="#f8f7f3" stroke="#c2cbc2"/>
+<text x="54" y="157" font-family="Arial,sans-serif" font-size="23" fill="#18342d">Today</text>
+<text x="54" y="188" font-family="Arial,sans-serif" font-size="14" fill="#64736a">Design draft</text>
+<rect x="58" y="215" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="72" y="245" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Your next session</text>
+<text x="72" y="272" font-family="Arial,sans-serif" font-size="14" fill="#47564e">No accepted session yet</text>
+<text x="72" y="292" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Find a room or create a group</text>
+<rect x="58" y="330" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="72" y="360" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Find a study room</text>
+<text x="72" y="387" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Capacity, amenities, freshness</text>
+<rect x="58" y="445" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="72" y="475" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Plan your work</text>
+<text x="72" y="502" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Deadlines and available blocks</text>
+<rect x="58" y="560" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="72" y="590" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Your groups</text>
+<text x="72" y="617" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Course conversations and invites</text>
+<text x="54" y="756" font-family="Arial,sans-serif" font-size="16" fill="#18342d">Today   Rooms   Groups   More</text>
+<rect x="420" y="110" width="360" height="690" rx="24" fill="#f8f7f3" stroke="#c2cbc2"/>
+<text x="444" y="157" font-family="Arial,sans-serif" font-size="23" fill="#18342d">Rooms</text>
+<text x="444" y="188" font-family="Arial,sans-serif" font-size="14" fill="#64736a">Design draft</text>
+<rect x="448" y="215" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="462" y="245" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Filter rooms</text>
+<text x="462" y="272" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Seats: 2+    Whiteboard    Quiet</text>
+<rect x="448" y="330" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="462" y="360" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Demo room A · 6 seats</text>
+<text x="462" y="387" font-family="Arial,sans-serif" font-size="14" fill="#47564e">2 reported occupants</text>
+<text x="462" y="407" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Synthetic update · 2 minutes ago</text>
+<rect x="448" y="445" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="462" y="475" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Demo room B · 4 seats</text>
+<text x="462" y="502" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Occupancy unknown</text>
+<text x="462" y="522" font-family="Arial,sans-serif" font-size="14" fill="#47564e">No event: do not label available</text>
+<rect x="448" y="560" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="462" y="590" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Demo room C · 8 seats</text>
+<text x="462" y="617" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Stale report · 12 minutes ago</text>
+<text x="462" y="637" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Refresh before making plans</text>
+<text x="444" y="756" font-family="Arial,sans-serif" font-size="16" fill="#18342d">Today   Rooms   Groups   More</text>
+<rect x="810" y="110" width="360" height="690" rx="24" fill="#f8f7f3" stroke="#c2cbc2"/>
+<text x="834" y="157" font-family="Arial,sans-serif" font-size="23" fill="#18342d">Groups</text>
+<text x="834" y="188" font-family="Arial,sans-serif" font-size="14" fill="#64736a">Design draft</text>
+<rect x="838" y="215" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="852" y="245" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Your course groups</text>
+<text x="852" y="272" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Create a group    Join by invite</text>
+<rect x="838" y="330" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="852" y="360" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Demo study group</text>
+<text x="852" y="387" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Member-only chat and sessions</text>
+<rect x="838" y="445" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="852" y="475" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Membership</text>
+<text x="852" y="502" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Seats and owner controls</text>
+<text x="852" y="522" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Full or denied state is explicit</text>
+<rect x="838" y="560" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="852" y="590" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Messages</text>
+<text x="852" y="617" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Sending / failed / deleted states</text>
+<text x="852" y="637" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Order and retries stay consistent</text>
+<text x="834" y="756" font-family="Arial,sans-serif" font-size="16" fill="#18342d">Today   Rooms   Groups   More</text>
+<rect x="30" y="845" width="360" height="690" rx="24" fill="#f8f7f3" stroke="#c2cbc2"/>
+<text x="54" y="892" font-family="Arial,sans-serif" font-size="23" fill="#18342d">Plan</text>
+<text x="54" y="923" font-family="Arial,sans-serif" font-size="14" fill="#64736a">Design draft</text>
+<rect x="58" y="950" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="72" y="980" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Task and availability</text>
+<text x="72" y="1007" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Deadline    Estimated minutes</text>
+<text x="72" y="1027" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Choose permitted time windows</text>
+<rect x="58" y="1065" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="72" y="1095" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Suggested sequence</text>
+<text x="72" y="1122" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Explain why each block was chosen</text>
+<rect x="58" y="1180" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="72" y="1210" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Compare with deadline-first</text>
+<text x="72" y="1237" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Conflicts    Uncovered minutes</text>
+<text x="72" y="1257" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Daily workload balance</text>
+<rect x="58" y="1295" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="72" y="1325" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Cannot fit this task</text>
+<text x="72" y="1352" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Keep partial feasible plan</text>
+<text x="72" y="1372" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Show remaining work and reason</text>
+<text x="54" y="1491" font-family="Arial,sans-serif" font-size="16" fill="#18342d">Today   Rooms   Groups   More</text>
+<rect x="420" y="845" width="360" height="690" rx="24" fill="#f8f7f3" stroke="#c2cbc2"/>
+<text x="444" y="892" font-family="Arial,sans-serif" font-size="23" fill="#18342d">Focus</text>
+<text x="444" y="923" font-family="Arial,sans-serif" font-size="14" fill="#64736a">Design draft</text>
+<rect x="448" y="950" width="304" height="190" rx="14" fill="#e0ece5" stroke="#d4d9d2"/>
+<text x="535" y="1010" font-family="Arial,sans-serif" font-size="30" fill="#18342d">25:00</text>
+<text x="477" y="1053" font-family="Arial,sans-serif" font-size="18" fill="#18342d">No shared session active</text>
+<text x="477" y="1084" font-family="Arial,sans-serif" font-size="14" fill="#18342d">Controls require server state</text>
+<rect x="448" y="1165" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="462" y="1195" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Start / Pause / Resume</text>
+<text x="462" y="1222" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Authorized member commands</text>
+<text x="462" y="1242" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Revision and duplicate protection</text>
+<rect x="448" y="1280" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="462" y="1310" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Reconnect state</text>
+<text x="462" y="1337" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Read phase and server anchor</text>
+<text x="462" y="1357" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Do not silently reset the session</text>
+<text x="444" y="1491" font-family="Arial,sans-serif" font-size="16" fill="#18342d">Today   Rooms   Groups   More</text>
+<rect x="810" y="845" width="360" height="690" rx="24" fill="#f8f7f3" stroke="#c2cbc2"/>
+<text x="834" y="892" font-family="Arial,sans-serif" font-size="23" fill="#18342d">Profile</text>
+<text x="834" y="923" font-family="Arial,sans-serif" font-size="14" fill="#64736a">Design draft</text>
+<rect x="838" y="950" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="852" y="980" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Account</text>
+<text x="852" y="1007" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Sign in / Google / Password reset</text>
+<rect x="838" y="1065" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="852" y="1095" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Course and availability</text>
+<text x="852" y="1122" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Owned preferences</text>
+<text x="852" y="1142" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Share permitted free/busy only</text>
+<rect x="838" y="1180" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="852" y="1210" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Notifications and media</text>
+<text x="852" y="1237" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Consent, quiet preferences</text>
+<text x="852" y="1257" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Image upload progress / retry</text>
+<rect x="838" y="1295" width="304" height="96" rx="14" fill="#ffffff" stroke="#d4d9d2"/>
+<text x="852" y="1325" font-family="Arial,sans-serif" font-size="18" fill="#18342d">Privacy and sign out</text>
+<text x="852" y="1352" font-family="Arial,sans-serif" font-size="14" fill="#47564e">Private defaults</text>
+<text x="852" y="1372" font-family="Arial,sans-serif" font-size="14" fill="#47564e">No credentials in public evidence</text>
+<text x="834" y="1491" font-family="Arial,sans-serif" font-size="16" fill="#18342d">Today   Rooms   Groups   More</text>
+</svg>
