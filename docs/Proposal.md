@@ -54,7 +54,7 @@ Target a 23-minute recording within the required 20–25 minutes. Both members s
 
 ## Review and remaining items
 
-The team must review the scope, proposed ownership, and visual direction; complete individual signed statements; confirm the proposal Dropbox; and resolve Firebase billing/account setup before deployment. The current Flutter app is only a labeled navigation/design preview. This proposal and wireframe were prepared with Codex assistance, recorded in AI_Usage_Log.md, and are not represented as unaided student work. No signatures, teammate implementation, evaluation metrics, peer feedback, or completed cloud behavior have been fabricated.
+The team must review the scope, proposed ownership, and visual direction; complete individual signed statements; confirm the proposal Dropbox; and resolve Firebase billing/account setup before deployment. The current Flutter app is only a labeled navigation/design preview. The drafting process is recorded in AI_Usage_Log.md. No signatures, teammate implementation, evaluation metrics, peer feedback, or completed cloud behavior have been fabricated.
 
 ## Official references
 
