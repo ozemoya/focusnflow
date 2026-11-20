@@ -14,7 +14,7 @@ Campus students need to find an appropriate study room, coordinate classmates, a
 
 ## Screens and navigation
 
-Six primary screens: Today, Rooms, Groups, Plan, Focus, and Profile. Authentication, password reset, group chat, room details, and session details are supporting flows. Today links to the next session and all primary destinations; a shared navigation drawer keeps each screen reachable. The editable SVG in design/wireframes.svg shows the six layouts. Empty, loading, denied, stale, offline, and service-error states are included in the acceptance plan.
+Six primary screens: Today, Rooms, Groups, Plan, Focus, and Profile. Authentication, password reset, group chat, room details, and session details are supporting flows. Today links to the next session and all primary destinations; bottom navigation and an all-screens menu keep each screen reachable. The screen overview in design/wireframes.svg shows the six layouts. Empty, loading, denied, stale, offline, and service-error states are included in the acceptance plan.
 
 ## Core functionality
 

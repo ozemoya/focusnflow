@@ -32,3 +32,11 @@ Find a study room, coordinate a course group, schedule a conflict-free session, 
 ## Final delivery targets
 
 The final README will link a tested APK, PowerPoint deck, and accessible 20–25 minute video. Both required topic questions FOC-U1 and FOC-U2, plus an owned lifecycle question for each presenter, must have working behavior, attributable history, and reproducible evidence. The final app must integrate Auth, Firestore, Storage, FCM, Cloud Functions, Remote Config, Analytics, and Crashlytics. App Check is optional.
+
+## Visual preview
+
+The six layouts now follow the supplied illustrated reference: cream surfaces, forest-green controls, warm brown focus panels and native vector study scenes. The overview uses actual Flutter renders; it is not an editable Figma design.
+
+![Six-screen preview](design/wireframes.png)
+
+Local preview controls include the room-category chips, focus duration, text-size slider, reminders toggle and bookmark state. They do not create memberships, confirm occupancy, send notifications or start a cloud timer. Both navigation/control tests pass; narrow-screen navigation with enlarged text is covered. Static analysis reports no issues.
