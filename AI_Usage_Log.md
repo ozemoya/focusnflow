@@ -11,3 +11,11 @@ Accepted in this preparation: the approved topic and undergraduate scope. Change
 Verification: official requirement text was read live. Prototype navigation checks and static analysis are recorded in the preparation status. Firebase behavior and AI evaluation remain unverified. No student learning outcome, teammate contribution, peer test, metric, or signed statement has been invented.
 
 Student follow-up: both members must review the plan, understand their assigned code, independently implement or materially verify owned tasks, and add what they accepted, changed, tested, and learned as development proceeds.
+
+## November 20 2026 — Reference-driven UI increment
+
+User supplied a three-screen illustrated reading-app reference and requested that FocusNFlow keep its study-organizer features while adopting that visual direction. Codex assisted with the six screen layouts, cream/forest/terracotta palette, native vector illustrations, navigation, and local-only preview controls. No illustration or screenshot is presented as a real campus occupancy report or a connected Firebase feature.
+
+Changed after review: replaced the generic card list with distinct Today, Rooms, Groups, Plan, Focus, and Profile layouts; kept unavailable/unknown states explicit; captured actual Flutter-rendered screen images rather than fabricated app results. The SVG is now a visual overview containing the rendered screens, not a claim of fully editable Figma layers.
+
+Verification: static analysis was clean before adding the updated tests; both widget checks passed after the restyle. They cover all six destinations, room filter state, duration selection without starting a shared session, and 320-pixel navigation at enlarged text. Each of the six rendered screens was visually inspected. No Android release-build, cloud, or AI-evaluation result is claimed by this UI increment.
