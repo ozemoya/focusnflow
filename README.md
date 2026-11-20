@@ -19,7 +19,7 @@ Planning and an explicitly labeled six-screen Flutter design preview. Firebase s
 - [Presentation and ownership plan](docs/Presentation.md)
 - [AI transparency log](AI_Usage_Log.md)
 
-Proposal due November 22, 2026 at 11:59 PM; final due December 13, 2026 at 11:59 PM, course local time. Signed individual statements and team review remain outstanding. No proposal has been submitted or approved for this project.
+Proposal due November 22, 2026 at 11:59 PM; final due December 13, 2026 at 11:59 PM, course local time. The proposal was submitted to Project 02 - Proposal on November 20, 2026 at 1:30 PM course time. The user-supplied signed team statement was included privately in iCollege. Instructor approval has not yet been confirmed.
 
 ## Run the preview
 
@@ -40,3 +40,4 @@ The six layouts now follow the supplied illustrated reference: cream surfaces, f
 ![Six-screen preview](design/wireframes.png)
 
 Local preview controls include the room-category chips, focus duration, text-size slider, reminders toggle and bookmark state. They do not create memberships, confirm occupancy, send notifications or start a cloud timer. Both navigation/control tests pass; narrow-screen navigation with enlarged text is covered. Static analysis reports no issues.
+
