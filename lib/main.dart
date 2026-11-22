@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'ui/study_art.dart';
+import 'auth/sign_in_page.dart';
 
 void main() => runApp(const FocusNFlowApp());
 const cream = Color(0xfffffdf6),
@@ -559,10 +560,8 @@ class _StudyHomeState extends State<StudyHome> {
       icon: Icons.person_outline_rounded,
       title: 'Account & courses',
       subtitle: 'Keep your study world together.',
-      onTap: () => previewMessage(
-        'Account setup',
-        'Email/password, Google sign-in, and password reset will be added in the authentication increment.',
-      ),
+      onTap: () => Navigator.of(context)
+          .push(MaterialPageRoute<Object?>(builder: (_) => const SignInPage())),
     ),
     _SoftRow(
       icon: Icons.schedule_rounded,

@@ -6,7 +6,9 @@ Team: Myles Miller (@ozemoya) and Eziz Bagshiyev (@ezizbagshiyev). Role assignme
 
 ## Current status
 
-Planning and an explicitly labeled six-screen Flutter design preview. Firebase services, study scheduling, shared timers, notifications, evaluation, and release artifacts are **not implemented or verified yet**. The prototype never presents fictional cloud records as real results.
+An explicitly labeled six-screen Flutter design preview, now with a supporting account form and a tested account-service boundary. Firebase services, study scheduling, shared timers, notifications, evaluation, and release artifacts are **not implemented or verified yet**. The prototype never presents fictional cloud records as real results.
+
+Profile → Account & courses opens the sign-in/reset form. Local validation, request locking and error recovery work; the default service explicitly refuses requests because Firebase is not configured. No credentials leave the app and no account/session is created. Google sign-in, registration, persistent session gating and a live Firebase adapter are still pending. See [increment 3 evidence](docs/Increment_03_Status.md).
 
 ## Proposal and design
 
@@ -39,5 +41,5 @@ The six layouts now follow the supplied illustrated reference: cream surfaces, f
 
 ![Six-screen preview](design/wireframes.png)
 
-Local preview controls include the room-category chips, focus duration, text-size slider, reminders toggle and bookmark state. They do not create memberships, confirm occupancy, send notifications or start a cloud timer. Both navigation/control tests pass; narrow-screen navigation with enlarged text is covered. Static analysis reports no issues.
+Local preview controls include the room-category chips, focus duration, text-size slider, reminders toggle and bookmark state. They do not create memberships, confirm occupancy, send notifications or start a cloud timer. All 10 current tests pass, including the original two navigation/control checks and eight account checks. Narrow-screen navigation with enlarged text is covered. Static analysis reports no issues.
 

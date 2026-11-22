@@ -1,5 +1,11 @@
 # AI usage log
 
+## November 22 2026 — Account form foundation
+
+Codex assisted with issue 1: the account-service interface, supporting sign-in/reset form, local input validation, asynchronous request/error handling and eight account tests. Accepted: separating local form behavior from the eventual Firebase adapter, preserving passwords exactly, neutral reset wording and mounted checks. Rejected: pretending that a successful test double proves cloud authentication, or allowing the unconfigured app to create a fake session. The existing six-screen visual direction is preserved.
+
+Actual checks: the first full suite found an existing lazy-list test failure; scrolling until the duration control is built fixed that test assumption. Final `flutter test` passed all 10 checks and `flutter analyze` found no issues. Firebase, installed-device authentication, Google sign-in and persisted sessions remain unverified. Neither student's learning nor Eziz's work is inferred from these automated checks.
+
 ## November 19 2026 — Codex
 
 User direction: choose an approved Project 2 topic and start a new project, with Eziz Bagshiyev as teammate. Sources: official Project 2 overview, team instructions, presentation questions, and additional requirements.

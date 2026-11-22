@@ -80,7 +80,11 @@ void main() {
       expect(find.text('The idea room'), findsOneWidget);
       expect(find.text('Occupancy unknown'), findsOneWidget);
       await open(tester, 'Focus');
-      await tester.ensureVisible(find.text('45 min'));
+      await tester.scrollUntilVisible(
+        find.text('45 min'),
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.tap(find.text('45 min'));
       await tester.pumpAndSettle();
       expect(find.text('45:00'), findsOneWidget);
