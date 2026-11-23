@@ -4,6 +4,8 @@ Planned layers: Flutter screen -> feature state -> repository -> Firebase SDK / 
 
 Profile/availability is private by default. Group data is member-readable. Membership, accepted schedules and shared timer state are server-authoritative; clients request transitions rather than editing protected aggregates. Firestore rules and Storage rules must deny unauthorized operations independently of visible UI controls.
 
+Implemented locally so far: firestore.rules allows only the owner's direct profile get/create/update with the small schema described in security/README.md; all other document access is denied. Seven emulator checks verify this initial boundary. These rules are not deployed and do not yet implement the planned group/availability policies or a Flutter data connection.
+
 Timers store phase, server anchor, remaining milliseconds, version and last operation identity. Clients interpolate display only; reconnect and lifecycle resume reread server state. Transactions reject stale revisions and make duplicate operation IDs safe. The final implementation must document clock-offset handling rather than assuming device clocks agree.
 
 Firestore indexes are planned for room filters, memberships, group message ordering and sessions by participant/date; exact deployed indexes remain to be verified. Concurrency tests need two accounts/devices and repeatable seeded demo records.

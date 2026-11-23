@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function owns(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    function validProfile(data) {
+      return data.keys().hasAll(['displayName', 'reminders', 'createdAt', 'updatedAt'])
+        && data.keys().hasOnly(['displayName', 'reminders', 'createdAt', 'updatedAt'])
+        && data.displayName is string
+        && data.displayName.size() >= 1
+        && data.displayName.size() <= 80
+        && data.displayName.matches('.*[^\\s].*')
+        && data.reminders is bool
+        && data.createdAt is timestamp
+        && data.updatedAt == request.time;
+    }
+
+    match /profiles/{uid} {
+      allow get: if owns(uid);
+      allow list: if false;
+      allow create: if owns(uid) && validProfile(request.resource.data)
+        && request.resource.data.createdAt == request.time;
+      allow update: if owns(uid) && validProfile(request.resource.data)
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

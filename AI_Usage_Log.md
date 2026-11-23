@@ -1,5 +1,11 @@
 # AI usage log
 
+## November 23 2026 — Profile rules and emulator checks
+
+Codex assisted with issue 2: the initial private-profile schema, deny-by-default Firestore rules and seven emulator tests. Consulted Firebase's official rules-unit-testing and field-access documentation, linked in security/README.md. Accepted: UID-based ownership, allowlisted fields, immutable creation time and server-generated timestamps. Rejected: trusting client roles/owner fields or treating emulator authentication contexts as live sign-in proof.
+
+Actual result: `npm test` ran the local Firestore rules engine with a demo project and passed all seven checks. No cloud resources were provisioned, deployed or billed, and no UI changes were made. Eziz now has verified repository write access; no implementation, learning or review is attributed to him without his own evidence.
+
 ## November 22 2026 — Account form foundation
 
 Codex assisted with issue 1: the account-service interface, supporting sign-in/reset form, local input validation, asynchronous request/error handling and eight account tests. Accepted: separating local form behavior from the eventual Firebase adapter, preserving passwords exactly, neutral reset wording and mounted checks. Rejected: pretending that a successful test double proves cloud authentication, or allowing the unconfigured app to create a fake session. The existing six-screen visual direction is preserved.

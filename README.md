@@ -10,6 +10,8 @@ An explicitly labeled six-screen Flutter design preview, now with a supporting a
 
 Profile → Account & courses opens the sign-in/reset form. Local validation, request locking and error recovery work; the default service explicitly refuses requests because Firebase is not configured. No credentials leave the app and no account/session is created. Google sign-in, registration, persistent session gating and a live Firebase adapter are still pending. See [increment 3 evidence](docs/Increment_03_Status.md).
 
+The Firebase foundation now includes owner-only profile rules and seven passing local Firestore emulator tests. These rules have **not been deployed**, and the Flutter profile is not connected to Firestore. See [security setup](security/README.md) and [increment 4 evidence](docs/Increment_04_Status.md).
+
 ## Proposal and design
 
 - [Proposal draft](docs/Proposal.md)
