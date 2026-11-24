@@ -1,0 +1,175 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:focusnflow/auth/account_service.dart';
+import 'package:focusnflow/auth/firebase_account_service.dart';
+
+class StubUser extends Fake implements User {
+  StubUser(this.uid, this.email);
+  @override
+  final String uid;
+  @override
+  final String? email;
+}
+
+class StubCredential extends Fake implements UserCredential {
+  StubCredential(this.user);
+  @override
+  final User? user;
+}
+
+class StubAuth extends Fake implements FirebaseAuth {
+  int signInCalls = 0;
+  int resetCalls = 0;
+  String? emailReceived;
+  String? passwordReceived;
+  String? failureCode;
+  User? result = StubUser('test-uid', 'student@example.edu');
+
+  @override
+  Future<UserCredential> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    signInCalls++;
+    emailReceived = email;
+    passwordReceived = password;
+    if (failureCode != null) {
+      throw FirebaseAuthException(
+        code: failureCode!,
+        message: 'Private diagnostic',
+      );
+    }
+    return StubCredential(result);
+  }
+
+  @override
+  Future<void> sendPasswordResetEmail({
+    required String email,
+    ActionCodeSettings? actionCodeSettings,
+  }) async {
+    resetCalls++;
+    emailReceived = email;
+    if (failureCode != null) {
+      throw FirebaseAuthException(
+        code: failureCode!,
+        message: 'Private diagnostic',
+      );
+    }
+  }
+}
+
+Matcher failure(String text) =>
+    isA<AccountFailure>().having((e) => e.message, 'message', text);
+
+void main() {
+  test(
+    'adapter sends trimmed email, unchanged password and returns SDK identity',
+    () async {
+      final auth = StubAuth();
+      final account = await FirebaseAccountService(auth)
+          .signIn(' student@example.edu ', ' password ');
+      expect(auth.emailReceived, 'student@example.edu');
+      expect(auth.passwordReceived, ' password ');
+      expect(account.uid, 'test-uid');
+      expect(account.email, 'student@example.edu');
+    },
+  );
+
+  test('invalid local input never reaches either SDK request', () async {
+    final auth = StubAuth();
+    final service = FirebaseAccountService(auth);
+    await expectLater(
+      service.signIn('bad', 'secret'),
+      throwsA(isA<AccountFailure>()),
+    );
+    await expectLater(
+      service.signIn('a@b.edu', ''),
+      throwsA(isA<AccountFailure>()),
+    );
+    await expectLater(
+      service.resetPassword('bad'),
+      throwsA(isA<AccountFailure>()),
+    );
+    expect(auth.signInCalls, 0);
+    expect(auth.resetCalls, 0);
+  });
+
+  test(
+    'missing or empty SDK identity never creates a client account',
+    () async {
+      final auth = StubAuth();
+      final service = FirebaseAccountService(auth);
+      for (final user in [null, StubUser('', null)]) {
+        auth.result = user;
+        await expectLater(
+          service.signIn('a@b.edu', 'secret'),
+          throwsA(isA<AccountFailure>()),
+        );
+      }
+    },
+  );
+
+  test(
+    'credential and disabled-account errors share a neutral message',
+    () async {
+      final auth = StubAuth();
+      final service = FirebaseAccountService(auth);
+      for (final code in [
+        'user-not-found',
+        'wrong-password',
+        'invalid-credential',
+        'user-disabled',
+      ]) {
+        auth.failureCode = code;
+        await expectLater(
+          service.signIn('a@b.edu', 'secret'),
+          throwsA(
+            failure(FirebaseAccountService.messageFor('invalid-credential')),
+          ),
+        );
+      }
+    },
+  );
+
+  test(
+    'network, throttling, setup and unknown failures use safe messages',
+    () async {
+      final auth = StubAuth();
+      for (final code in [
+        'network-request-failed',
+        'too-many-requests',
+        'operation-not-allowed',
+        'invalid-email',
+        'unknown-code',
+      ]) {
+        auth.failureCode = code;
+        await expectLater(
+          FirebaseAccountService(auth).signIn('a@b.edu', 'secret'),
+          throwsA(failure(FirebaseAccountService.messageFor(code))),
+        );
+        expect(
+          FirebaseAccountService.messageFor(code),
+          isNot(contains('Private diagnostic')),
+        );
+      }
+    },
+  );
+
+  test('reset forwards email and hides the missing-account response', () async {
+    final auth = StubAuth();
+    final service = FirebaseAccountService(auth);
+    await service.resetPassword(' student@example.edu ');
+    expect(auth.emailReceived, 'student@example.edu');
+    auth.failureCode = 'user-not-found';
+    await service.resetPassword('missing@example.edu');
+    expect(auth.resetCalls, 2);
+  });
+
+  test('reset network failure is not reported as a successful send', () async {
+    final auth = StubAuth()..failureCode = 'network-request-failed';
+    await expectLater(
+      FirebaseAccountService(auth).resetPassword('a@b.edu'),
+      throwsA(failure('Check your connection and try again.')),
+    );
+  });
+}

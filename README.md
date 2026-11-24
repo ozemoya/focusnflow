@@ -12,6 +12,8 @@ Profile → Account & courses opens the sign-in/reset form. Local validation, re
 
 The Firebase foundation now includes owner-only profile rules and seven passing local Firestore emulator tests. These rules have **not been deployed**, and the Flutter profile is not connected to Firestore. See [security setup](security/README.md) and [increment 4 evidence](docs/Increment_04_Status.md).
 
+An official Firebase Auth SDK adapter now implements email sign-in and password reset, with seven adapter unit tests. It is not wired into the preview until Firebase initialization and session-state handling are ready. A debug APK compiled successfully with the new SDK dependencies; live sign-in, installation and persistence are not yet verified. See [integration handoff](docs/Firebase_Auth_Setup.md) and [increment 5](docs/Increment_05_Status.md).
+
 ## Proposal and design
 
 - [Proposal draft](docs/Proposal.md)
@@ -43,5 +45,5 @@ The six layouts now follow the supplied illustrated reference: cream surfaces, f
 
 ![Six-screen preview](design/wireframes.png)
 
-Local preview controls include the room-category chips, focus duration, text-size slider, reminders toggle and bookmark state. They do not create memberships, confirm occupancy, send notifications or start a cloud timer. All 10 current tests pass, including the original two navigation/control checks and eight account checks. Narrow-screen navigation with enlarged text is covered. Static analysis reports no issues.
+Local preview controls include the room-category chips, focus duration, text-size slider, reminders toggle and bookmark state. They do not create memberships, confirm occupancy, send notifications or start a cloud timer. All 17 Flutter tests pass, including two navigation/control checks, eight account-form checks and seven SDK-adapter checks. Narrow-screen navigation with enlarged text is covered. Static analysis reports no issues.
 

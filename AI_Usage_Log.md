@@ -1,5 +1,11 @@
 # AI usage log
 
+## November 24 2026 — Firebase Auth adapter
+
+Codex assisted with issue 3: official SDK dependencies, the email sign-in/reset adapter, safe error mapping, seven SDK-interface tests and the cloud-configuration handoff. Consulted the official Firebase Flutter Auth documentation linked in docs/Firebase_Auth_Setup.md. Accepted: explicit SDK injection and refusing missing identity. Rejected: silently switching the preview to an uninitialized Firebase singleton or treating SDK stubs as live authentication proof.
+
+Actual checks: all 17 Flutter tests passed and the Android debug APK compiled. The first analyzer run found test brace lints and Firebase CLI Dart templates under node_modules; corrected the lints and scoped that external dependency tree out of Flutter analysis. No cloud configuration, paid service, live login, installed APK test, student contribution or learning claim was fabricated.
+
 ## November 23 2026 — Profile rules and emulator checks
 
 Codex assisted with issue 2: the initial private-profile schema, deny-by-default Firestore rules and seven emulator tests. Consulted Firebase's official rules-unit-testing and field-access documentation, linked in security/README.md. Accepted: UID-based ownership, allowlisted fields, immutable creation time and server-generated timestamps. Rejected: trusting client roles/owner fields or treating emulator authentication contexts as live sign-in proof.

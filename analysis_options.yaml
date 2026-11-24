@@ -13,6 +13,7 @@ analyzer:
   exclude:
     - build/**
     - android/**
+    - security/node_modules/**
 
 linter:
   # The lint rules applied to this project can be customized in the
