@@ -1,5 +1,13 @@
 # AI usage log
 
+## November 25 2026 — Dedicated Firebase project registration
+
+Codex used the official authenticated Firebase and FlutterFire CLIs to create the dedicated FocusNFlow project and Android client configuration, based on the [official Flutter setup guide](https://firebase.google.com/docs/flutter/setup). Accepted: isolating the project from prior assignments and retaining demo-only rule tests. Rejected: treating registration as functional sign-in, enabling a paid plan or publishing server credentials.
+
+The first FlutterFire lookup missed the newly created project; after a direct listing verified ACTIVE state, retrying succeeded. Configuration identity was cross-checked against the actual registered app. Runtime authentication remains unconnected; no student learning, peer verification or Eziz contribution is inferred from this setup.
+
+Verification: seven Firestore emulator tests passed after the config merge, Flutter analysis found no issues, and the Android debug APK compiled with Google Services configuration. Compilation is not installation, sign-in or persistence proof.
+
 ## November 24 2026 — Firebase Auth adapter
 
 Codex assisted with issue 3: official SDK dependencies, the email sign-in/reset adapter, safe error mapping, seven SDK-interface tests and the cloud-configuration handoff. Consulted the official Firebase Flutter Auth documentation linked in docs/Firebase_Auth_Setup.md. Accepted: explicit SDK injection and refusing missing identity. Rejected: silently switching the preview to an uninitialized Firebase singleton or treating SDK stubs as live authentication proof.

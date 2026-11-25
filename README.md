@@ -14,6 +14,8 @@ The Firebase foundation now includes owner-only profile rules and seven passing 
 
 An official Firebase Auth SDK adapter now implements email sign-in and password reset, with seven adapter unit tests. It is not wired into the preview until Firebase initialization and session-state handling are ready. A debug APK compiled successfully with the new SDK dependencies; live sign-in, installation and persistence are not yet verified. See [integration handoff](docs/Firebase_Auth_Setup.md) and [increment 5](docs/Increment_05_Status.md).
 
+The dedicated `focusnflow-myles-eziz` Firebase project and Android app are now registered, with FlutterFire-generated Android configuration. No billing account was linked by this setup. Runtime initialization, provider activation and session-state integration remain pending; registration alone does not make login functional.
+
 ## Proposal and design
 
 - [Proposal draft](docs/Proposal.md)
@@ -29,7 +31,7 @@ Proposal due November 22, 2026 at 11:59 PM; final due December 13, 2026 at 11:59
 
 ## Run the preview
 
-Install Flutter, run `flutter pub get`, then `flutter run`. Use `flutter test` and `flutter analyze` for the current navigation checks. There are no credentials, Firebase project keys, or external API secrets in this starter.
+Install Flutter, run `flutter pub get`, then `flutter run`. Use `flutter test` and `flutter analyze` for the current checks. Firebase client configuration contains public application identifiers, as described in the [official setup guide](https://firebase.google.com/docs/flutter/setup). No server credentials, passwords, private keys or external API secrets belong in this repository.
 
 ## Product direction
 

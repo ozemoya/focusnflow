@@ -2,6 +2,8 @@
 
 The SDK adapter is lib/auth/firebase_account_service.dart. It requires an already initialized FirebaseAuth instance; constructing it does not create a project or enable a provider. The app still intentionally uses UnconfiguredAccountService. Do not swap in the adapter until project configuration and session-state integration are ready.
 
+November 25 update: dedicated project `focusnflow-myles-eziz` is active. FlutterFire registered Android package `com.example.focusnflow`, generated lib/firebase_options.dart and android/app/google-services.json, and added the Google Services Gradle plugin. These are client configuration, not service-account credentials. No runtime initialization, Auth provider activation, Firestore database creation or rule deployment was performed by this setup. No billing account was linked. The steps below remain the full handoff; project creation and Android registration are now complete.
+
 Next steps:
 
 1. Create or select a dedicated FocusNFlow Firebase project using the intended account. Review any actual legal/access prompts and obtain billing authorization before paid services are enabled. Never reuse another assignment's production data.
