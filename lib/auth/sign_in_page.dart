@@ -85,8 +85,10 @@ class _SignInPageState extends State<SignInPage> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Account setup preview. Firebase sign-in, Google sign-in and registration are not connected yet.',
+            Text(
+              widget.service is UnconfiguredAccountService
+                  ? 'Account setup preview. Firebase sign-in, Google sign-in and registration are not connected yet.'
+                  : 'Sign in with your email account. Registration and Google sign-in are coming next.',
             ),
             const SizedBox(height: 24),
             Form(

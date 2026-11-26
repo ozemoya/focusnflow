@@ -2,10 +2,28 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'account_service.dart';
 
-class FirebaseAccountService implements AccountService {
+class FirebaseAccountService implements SessionService {
   const FirebaseAccountService(this.auth);
 
   final FirebaseAuth auth;
+
+  @override
+  Stream<Account?> watchAccount() => auth.authStateChanges().map((user) {
+    if (user == null) return null;
+    if (user.uid.isEmpty) {
+      throw const AccountFailure('Account could not be verified.');
+    }
+    return Account(uid: user.uid, email: user.email ?? '');
+  });
+
+  @override
+  Future<void> signOut() async {
+    try {
+      await auth.signOut();
+    } on FirebaseAuthException catch (error) {
+      throw AccountFailure(messageFor(error.code));
+    }
+  }
 
   @override
   Future<Account> signIn(String email, String password) async {

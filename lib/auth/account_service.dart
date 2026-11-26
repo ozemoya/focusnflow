@@ -10,17 +10,28 @@ abstract interface class AccountService {
   Future<void> resetPassword(String email);
 }
 
+abstract interface class SessionService implements AccountService {
+  Stream<Account?> watchAccount();
+  Future<void> signOut();
+}
+
 class AccountFailure implements Exception {
   const AccountFailure(this.message);
 
   final String message;
 }
 
-class UnconfiguredAccountService implements AccountService {
+class UnconfiguredAccountService implements SessionService {
   const UnconfiguredAccountService();
 
   static const message =
       'Account services are not connected yet. No details were sent.';
+
+  @override
+  Stream<Account?> watchAccount() => Stream.value(null);
+
+  @override
+  Future<void> signOut() async {}
 
   @override
   Future<Account> signIn(String email, String password) async {

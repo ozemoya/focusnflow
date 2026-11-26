@@ -18,6 +18,20 @@ class StubCredential extends Fake implements UserCredential {
 }
 
 class StubAuth extends Fake implements FirebaseAuth {
+  Stream<User?> users = Stream.value(null);
+  bool signedOut = false;
+
+  @override
+  Stream<User?> authStateChanges() => users;
+
+  @override
+  Future<void> signOut() async {
+    if (failureCode != null) {
+      throw FirebaseAuthException(code: failureCode!);
+    }
+    signedOut = true;
+  }
+
   int signInCalls = 0;
   int resetCalls = 0;
   String? emailReceived;
@@ -62,6 +76,33 @@ Matcher failure(String text) =>
     isA<AccountFailure>().having((e) => e.message, 'message', text);
 
 void main() {
+  test('SDK session events map restored user and signed-out state', () async {
+    final auth = StubAuth()
+      ..users = Stream.fromIterable([StubUser('restored', 'a@b.edu'), null]);
+    final events = await FirebaseAccountService(auth).watchAccount().toList();
+    expect(events.first?.uid, 'restored');
+    expect(events.last, isNull);
+  });
+
+  test('empty session UID fails rather than creating an account', () async {
+    final auth = StubAuth()..users = Stream.value(StubUser('', 'a@b.edu'));
+    await expectLater(
+      FirebaseAccountService(auth).watchAccount(),
+      emitsError(isA<AccountFailure>()),
+    );
+  });
+
+  test('SDK sign-out completes or maps its failure', () async {
+    final auth = StubAuth();
+    final service = FirebaseAccountService(auth);
+    await service.signOut();
+    expect(auth.signedOut, isTrue);
+    auth.failureCode = 'network-request-failed';
+    await expectLater(
+      service.signOut(),
+      throwsA(failure('Check your connection and try again.')),
+    );
+  });
   test(
     'adapter sends trimmed email, unchanged password and returns SDK identity',
     () async {

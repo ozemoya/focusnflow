@@ -14,3 +14,5 @@ Board columns: Backlog -> Ready -> In progress -> Review -> Verified -> Done. A 
 | Dec 13 | Submission | Verify all four artifact links; submit GitHub and video URLs before 11:59 PM. |
 
 These are work windows, not a scheduled automation or completed milestones. Keep increments small enough to review and demonstrate. Record actual progress, failures and scope changes when they happen.
+
+November 26 checkpoint: cloud foundation is partial. Project/Android registration, local rules, SDK adapter and startup/session UI are implemented; real provider activation, registration/social flow, installed-device persistence and Firestore integration remain open. Finish account verification before authenticated rooms/groups. Carry this work into the next increment rather than claiming the Nov 23–26 phase complete.

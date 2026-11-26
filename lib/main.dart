@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'ui/study_art.dart';
 import 'auth/sign_in_page.dart';
+import 'auth/account_service.dart';
+import 'auth/firebase_account_service.dart';
+import 'firebase_options.dart';
 
-void main() => runApp(const FocusNFlowApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    ).timeout(const Duration(seconds: 15));
+    runApp(
+      FocusNFlowApp(service: FirebaseAccountService(FirebaseAuth.instance)),
+    );
+  } catch (_) {
+    runApp(
+      const FocusNFlowApp(
+        startupMessage: 'Account setup could not start. Restart the app to try again. Study screens remain previews.',
+      ),
+    );
+  }
+}
+
 const cream = Color(0xfffffdf6),
     brown = Color(0xff825345),
     forest = Color(0xff285742),
@@ -19,7 +41,13 @@ const sections = <String, String>{
 };
 
 class FocusNFlowApp extends StatelessWidget {
-  const FocusNFlowApp({super.key});
+  const FocusNFlowApp({
+    super.key,
+    this.service = const UnconfiguredAccountService(),
+    this.startupMessage,
+  });
+  final SessionService service;
+  final String? startupMessage;
   @override
   Widget build(BuildContext context) => MaterialApp(
     title: 'FocusNFlow',
@@ -43,12 +71,60 @@ class FocusNFlowApp extends StatelessWidget {
         titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
       ),
     ),
-    home: const StudyHome(),
+    home: AccountHome(service: service, startupMessage: startupMessage),
+  );
+}
+
+class AccountHome extends StatefulWidget {
+  const AccountHome({super.key, required this.service, this.startupMessage});
+  final SessionService service;
+  final String? startupMessage;
+
+  @override
+  State<AccountHome> createState() => _AccountHomeState();
+}
+
+class _AccountHomeState extends State<AccountHome> {
+  late Stream<Account?> accounts = widget.service.watchAccount();
+
+  @override
+  void didUpdateWidget(covariant AccountHome oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.service != widget.service) {
+      accounts = widget.service.watchAccount();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => StreamBuilder<Account?>(
+    stream: accounts,
+    builder: (context, snapshot) => StudyHome(
+      service: widget.service,
+      account:
+          snapshot.hasError ||
+              snapshot.connectionState == ConnectionState.waiting
+          ? null
+          : snapshot.data,
+      checkingAccount: snapshot.connectionState == ConnectionState.waiting,
+      accountError: snapshot.hasError
+          ? 'Account could not be verified. Restart the app to try again.'
+          : widget.startupMessage,
+    ),
   );
 }
 
 class StudyHome extends StatefulWidget {
-  const StudyHome({super.key});
+  const StudyHome({
+    super.key,
+    required this.service,
+    this.account,
+    this.checkingAccount = false,
+    this.accountError,
+  });
+  final SessionService service;
+  final Account? account;
+  final bool checkingAccount;
+  final String? accountError;
   @override
   State<StudyHome> createState() => _StudyHomeState();
 }
@@ -58,6 +134,26 @@ class _StudyHomeState extends State<StudyHome> {
   bool bookmarked = false, reminders = false;
   double textSize = 16;
   final tabs = ['Today', 'Rooms', 'Groups', 'Profile'];
+  bool signingOut = false;
+  String? signOutError;
+
+  Future<void> signOut() async {
+    if (signingOut) return;
+    setState(() {
+      signingOut = true;
+      signOutError = null;
+    });
+    try {
+      await widget.service.signOut();
+    } catch (_) {
+      if (mounted) {
+        setState(() => signOutError = 'Could not sign out. Try again.');
+      }
+    } finally {
+      if (mounted) setState(() => signingOut = false);
+    }
+  }
+
   void go(String page) => setState(() => selected = page);
   TextStyle get heading => const TextStyle(
     fontSize: 23,
@@ -546,8 +642,12 @@ class _StudyHomeState extends State<StudyHome> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Your corner.', style: heading.copyWith(fontSize: 29)),
-              const Text(
-                'Not signed in',
+              Text(
+                widget.checkingAccount
+                    ? 'Checking account…'
+                    : widget.accountError != null
+                    ? 'Account unavailable'
+                    : widget.account?.email ?? 'Not signed in',
                 style: TextStyle(color: muted, fontSize: 12),
               ),
             ],
@@ -555,13 +655,28 @@ class _StudyHomeState extends State<StudyHome> {
         ),
       ],
     ),
+    if (widget.accountError != null) Text(widget.accountError!),
+    if (signOutError != null && widget.account != null) Text(signOutError!),
+    if (widget.account != null)
+      TextButton(
+        onPressed: signingOut ? null : signOut,
+        child: Text(signingOut ? 'Signing out…' : 'Sign out'),
+      ),
     label('Make yourself at home'),
     _SoftRow(
       icon: Icons.person_outline_rounded,
       title: 'Account & courses',
       subtitle: 'Keep your study world together.',
-      onTap: () => Navigator.of(context)
-          .push(MaterialPageRoute<Object?>(builder: (_) => const SignInPage())),
+      onTap:
+          widget.checkingAccount ||
+              widget.accountError != null ||
+              widget.account != null
+          ? null
+          : () => Navigator.of(context).push(
+              MaterialPageRoute<Object?>(
+                builder: (_) => SignInPage(service: widget.service),
+              ),
+            ),
     ),
     _SoftRow(
       icon: Icons.schedule_rounded,
@@ -673,12 +788,14 @@ class _StudyHomeState extends State<StudyHome> {
                       ],
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'DESIGN PREVIEW · NOT CONNECTED',
+                        widget.service is UnconfiguredAccountService
+                            ? 'DESIGN PREVIEW · NOT CONNECTED'
+                            : 'STUDY FEATURES · PREVIEW',
                         style: TextStyle(
                           fontSize: 9,
                           letterSpacing: 1.2,

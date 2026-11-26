@@ -6,15 +6,15 @@ Team: Myles Miller (@ozemoya) and Eziz Bagshiyev (@ezizbagshiyev). Role assignme
 
 ## Current status
 
-An explicitly labeled six-screen Flutter design preview, now with a supporting account form and a tested account-service boundary. Firebase services, study scheduling, shared timers, notifications, evaluation, and release artifacts are **not implemented or verified yet**. The prototype never presents fictional cloud records as real results.
+Six illustrated study-feature previews with Firebase account integration in progress. Android startup now initializes Firebase and injects the SDK account service; Profile listens to account-state events and exposes sign-out. Provider activation and real-device sign-in/persistence are **not verified yet**. Study scheduling, shared timers, notifications, evaluation and release artifacts remain pending. The app never presents fictional cloud records as real results.
 
-Profile → Account & courses opens the sign-in/reset form. Local validation, request locking and error recovery work; the default service explicitly refuses requests because Firebase is not configured. No credentials leave the app and no account/session is created. Google sign-in, registration, persistent session gating and a live Firebase adapter are still pending. See [increment 3 evidence](docs/Increment_03_Status.md).
+Profile → Account & courses opens the sign-in/reset form when account state is known and signed out. Validation, request locking and error recovery are tested locally. Authentication state comes from SDK events rather than the form's route result. Startup/stream failures leave the account unavailable. Registration, Google sign-in and actual restored-device-session evidence are still pending. See [increment 7](docs/Increment_07_Status.md).
 
 The Firebase foundation now includes owner-only profile rules and seven passing local Firestore emulator tests. These rules have **not been deployed**, and the Flutter profile is not connected to Firestore. See [security setup](security/README.md) and [increment 4 evidence](docs/Increment_04_Status.md).
 
-An official Firebase Auth SDK adapter now implements email sign-in and password reset, with seven adapter unit tests. It is not wired into the preview until Firebase initialization and session-state handling are ready. A debug APK compiled successfully with the new SDK dependencies; live sign-in, installation and persistence are not yet verified. See [integration handoff](docs/Firebase_Auth_Setup.md) and [increment 5](docs/Increment_05_Status.md).
+The official Firebase Auth adapter implements email sign-in, reset, account-state events and sign-out. A debug APK compiles with the integration; a compiled build and SDK-interface stubs do not prove live login or persistence. See [integration handoff](docs/Firebase_Auth_Setup.md).
 
-The dedicated `focusnflow-myles-eziz` Firebase project and Android app are now registered, with FlutterFire-generated Android configuration. No billing account was linked by this setup. Runtime initialization, provider activation and session-state integration remain pending; registration alone does not make login functional.
+The dedicated `focusnflow-myles-eziz` Firebase project and Android app are registered, with FlutterFire-generated Android configuration. No billing account was linked by this setup. Provider activation and end-to-end account verification remain pending. Default constructor injection used by preview tests still selects the unconfigured service; Android main selects the real service after successful initialization.
 
 ## Proposal and design
 
@@ -47,5 +47,5 @@ The six layouts now follow the supplied illustrated reference: cream surfaces, f
 
 ![Six-screen preview](design/wireframes.png)
 
-Local preview controls include the room-category chips, focus duration, text-size slider, reminders toggle and bookmark state. They do not create memberships, confirm occupancy, send notifications or start a cloud timer. All 17 Flutter tests pass, including two navigation/control checks, eight account-form checks and seven SDK-adapter checks. Narrow-screen navigation with enlarged text is covered. Static analysis reports no issues.
+Local preview controls include the room-category chips, focus duration, text-size slider, reminders toggle and bookmark state. They do not create memberships, confirm occupancy, send notifications or start a cloud timer. All 26 Flutter tests pass: two navigation/control, eight account-form, ten SDK-adapter and six session-state checks. Narrow-screen navigation with enlarged text is covered. The overview shows the unconfigured preview state; Profile's email, checking/error text and sign-out control vary with verified account events. Static analysis reports no issues.
 

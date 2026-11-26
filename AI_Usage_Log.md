@@ -1,5 +1,11 @@
 # AI usage log
 
+## November 26 2026 — Startup and session state
+
+Codex assisted with issue 5: Firebase startup/failure fallback, service injection, account-state stream mapping, Profile states and sign-out handling. Consulted official Firebase Flutter auth-state guidance, linked in docs/Increment_07_Status.md. Accepted: deriving identity from SDK events, clearing stale identity while a source changes/fails, and retaining signed-in state after a failed sign-out. Rejected: using the form route result as proof of a session or claiming stub restoration is native persistence evidence.
+
+Actual checks: 26 Flutter tests passed; corrected three brace lints and final analysis was clean. The debug APK compiled. No installed-device login, native persistence, provider activation, learning outcome or teammate contribution was invented. The cloud-foundation work window is recorded as partial rather than completed.
+
 ## November 25 2026 — Dedicated Firebase project registration
 
 Codex used the official authenticated Firebase and FlutterFire CLIs to create the dedicated FocusNFlow project and Android client configuration, based on the [official Flutter setup guide](https://firebase.google.com/docs/flutter/setup). Accepted: isolating the project from prior assignments and retaining demo-only rule tests. Rejected: treating registration as functional sign-in, enabling a paid plan or publishing server credentials.

@@ -1,6 +1,8 @@
 # Firebase Auth integration handoff
 
-The SDK adapter is lib/auth/firebase_account_service.dart. It requires an already initialized FirebaseAuth instance; constructing it does not create a project or enable a provider. The app still intentionally uses UnconfiguredAccountService. Do not swap in the adapter until project configuration and session-state integration are ready.
+The SDK adapter is lib/auth/firebase_account_service.dart. It requires an already initialized FirebaseAuth instance; constructing it does not create a project or enable a provider. Android main now initializes Firebase with a 15-second timeout and injects the adapter. Initialization failure selects the unconfigured service with a visible account-unavailable message. Default constructor injection remains unconfigured for preview tests.
+
+November 26 update: Profile now derives identity from authStateChanges, clears visible identity on stream failure/source replacement, and supports pending/failed sign-out. Unit tests use explicit stubs. Provider activation and real installed-device login, reset and persistence remain unverified; do not count these local tests as cloud evidence.
 
 November 25 update: dedicated project `focusnflow-myles-eziz` is active. FlutterFire registered Android package `com.example.focusnflow`, generated lib/firebase_options.dart and android/app/google-services.json, and added the Google Services Gradle plugin. These are client configuration, not service-account credentials. No runtime initialization, Auth provider activation, Firestore database creation or rule deployment was performed by this setup. No billing account was linked. The steps below remain the full handoff; project creation and Android registration are now complete.
 
