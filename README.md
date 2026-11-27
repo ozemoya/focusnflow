@@ -6,7 +6,7 @@ Team: Myles Miller (@ozemoya) and Eziz Bagshiyev (@ezizbagshiyev). Role assignme
 
 ## Current status
 
-Six illustrated study-feature previews with Firebase account integration in progress. Android startup now initializes Firebase and injects the SDK account service; Profile listens to account-state events and exposes sign-out. Provider activation and real-device sign-in/persistence are **not verified yet**. Study scheduling, shared timers, notifications, evaluation and release artifacts remain pending. The app never presents fictional cloud records as real results.
+Six illustrated study-feature previews with Firebase account integration in progress. Android startup initializes Firebase and injects the SDK account service; Profile listens to account-state events and exposes sign-out. Email/password authentication is enabled and verified through a disposable live REST check. Installed-device sign-in/persistence are **not verified yet**. Study scheduling, shared timers, notifications, evaluation and release artifacts remain pending. The app never presents fictional cloud records as real results.
 
 Profile → Account & courses opens the sign-in/reset form when account state is known and signed out. Validation, request locking and error recovery are tested locally. Authentication state comes from SDK events rather than the form's route result. Startup/stream failures leave the account unavailable. Registration, Google sign-in and actual restored-device-session evidence are still pending. See [increment 7](docs/Increment_07_Status.md).
 
@@ -14,7 +14,7 @@ The Firebase foundation now includes owner-only profile rules and seven passing 
 
 The official Firebase Auth adapter implements email sign-in, reset, account-state events and sign-out. A debug APK compiles with the integration; a compiled build and SDK-interface stubs do not prove live login or persistence. See [integration handoff](docs/Firebase_Auth_Setup.md).
 
-The dedicated `focusnflow-myles-eziz` Firebase project and Android app are registered, with FlutterFire-generated Android configuration. No billing account was linked by this setup. Provider activation and end-to-end account verification remain pending. Default constructor injection used by preview tests still selects the unconfigured service; Android main selects the real service after successful initialization.
+The dedicated `focusnflow-myles-eziz` Firebase project and Android app are registered, with FlutterFire-generated Android configuration. No billing account was linked by this setup. The email/password provider is deployed; a live REST check verified weak-password rejection, account creation, wrong-password denial, correct login, token refresh and account cleanup. This does not prove the APK's login or persistence. See [increment 8](docs/Increment_08_Status.md). Default constructor injection used by preview tests still selects the unconfigured service; Android main selects the real service after successful initialization.
 
 ## Proposal and design
 

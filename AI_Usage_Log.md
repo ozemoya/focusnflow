@@ -1,5 +1,11 @@
 # AI usage log
 
+## November 27 2026 — Email provider and live cloud check
+
+Codex assisted with issue 6: declaring/deploying email/password authentication and writing a separate guarded live REST smoke script. Reviewed the installed official Firebase CLI's auth provider deployment code and Firebase's official REST reference. Accepted: random disposable fictional accounts, in-memory credentials, explicit live-test opt-in and targeted cleanup. Rejected: claiming REST success proves native Flutter login/persistence, sending test reset emails or retaining credentials in logs.
+
+Actual result: deployment succeeded; the final six-check live run passed and confirmed cleanup/deleted-account denial. The initial four-check run also cleaned up its disposable account. The opt-in refusal was verified. No student learning, Eziz contribution, device result, social login or paid-service authorization was invented.
+
 ## November 26 2026 — Startup and session state
 
 Codex assisted with issue 5: Firebase startup/failure fallback, service injection, account-state stream mapping, Profile states and sign-out handling. Consulted official Firebase Flutter auth-state guidance, linked in docs/Increment_07_Status.md. Accepted: deriving identity from SDK events, clearing stale identity while a source changes/fails, and retaining signed-in state after a failed sign-out. Rejected: using the form route result as proof of a session or claiming stub restoration is native persistence evidence.

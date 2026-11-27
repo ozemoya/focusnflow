@@ -9,3 +9,11 @@ Every other document and subcollection is denied. Add narrowly scoped permission
 The tests use fictional identities and the real local Firestore rules engine. Mock authentication contexts prove rule decisions, not successful Firebase sign-in or production configuration.
 
 References: [Firebase rules testing](https://firebase.google.com/docs/rules/unit-tests) and [field access restrictions](https://firebase.google.com/docs/firestore/security/rules-fields).
+
+## Optional live authentication check
+
+`auth-smoke.mjs` is separate from `npm test`: it contacts the real dedicated Firebase project. In PowerShell, set `$env:FOCUSNFLOW_LIVE_AUTH_TEST='yes'`, then run `node auth-smoke.mjs`. Without that explicit opt-in it refuses to run. It also checks the expected project ID and Android package before making requests.
+
+The check uses a random fictional @example.invalid address and a random password held only in memory. It verifies the five-character password boundary, account creation, invalid/valid login, refresh identity and deletion. A finally block attempts to delete only the newly created account using its own returned token; a final sign-in check confirms the deleted account is denied. It sends no email, stores no credentials and prints only safe check results. If cleanup fails, stop and investigate the private run; do not broadly delete project accounts. Transport failure before the server's creation response is received can leave a disposable account requiring manual investigation.
+
+These are live REST results, not native Flutter installation or restored-session evidence. See [Firebase's Auth REST reference](https://firebase.google.com/docs/reference/rest/auth). Email/password provider activation is declared in firebase.json and was deployed separately with the official CLI's `deploy --only auth` command. No billing or other provider configuration was requested.

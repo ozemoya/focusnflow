@@ -16,3 +16,5 @@ Board columns: Backlog -> Ready -> In progress -> Review -> Verified -> Done. A 
 These are work windows, not a scheduled automation or completed milestones. Keep increments small enough to review and demonstrate. Record actual progress, failures and scope changes when they happen.
 
 November 26 checkpoint: cloud foundation is partial. Project/Android registration, local rules, SDK adapter and startup/session UI are implemented; real provider activation, registration/social flow, installed-device persistence and Firestore integration remain open. Finish account verification before authenticated rooms/groups. Carry this work into the next increment rather than claiming the Nov 23–26 phase complete.
+
+November 27 checkpoint: email/password is now enabled and a disposable live REST lifecycle check passed with cleanup. Native account registration/login/persistence, Google flow and Firestore integration remain open; REST evidence does not complete the device/account phase.
