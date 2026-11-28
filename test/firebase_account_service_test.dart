@@ -33,11 +33,29 @@ class StubAuth extends Fake implements FirebaseAuth {
   }
 
   int signInCalls = 0;
+  int registrationCalls = 0;
   int resetCalls = 0;
   String? emailReceived;
   String? passwordReceived;
   String? failureCode;
   User? result = StubUser('test-uid', 'student@example.edu');
+
+  @override
+  Future<UserCredential> createUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    registrationCalls++;
+    emailReceived = email;
+    passwordReceived = password;
+    if (failureCode != null) {
+      throw FirebaseAuthException(
+        code: failureCode!,
+        message: 'Private diagnostic',
+      );
+    }
+    return StubCredential(result);
+  }
 
   @override
   Future<UserCredential> signInWithEmailAndPassword({
@@ -76,6 +94,58 @@ Matcher failure(String text) =>
     isA<AccountFailure>().having((e) => e.message, 'message', text);
 
 void main() {
+  test(
+    'registration forwards six-character boundary and returns SDK identity',
+    () async {
+      final auth = StubAuth();
+      final account = await FirebaseAccountService(auth)
+          .register(' student@example.edu ', ' six  ');
+      expect(auth.registrationCalls, 1);
+      expect(auth.emailReceived, 'student@example.edu');
+      expect(auth.passwordReceived, ' six  ');
+      expect(account.uid, 'test-uid');
+    },
+  );
+
+  test('invalid registration input never reaches SDK', () async {
+    final auth = StubAuth();
+    final service = FirebaseAccountService(auth);
+    await expectLater(
+      service.register('bad', 'secret'),
+      throwsA(isA<AccountFailure>()),
+    );
+    await expectLater(
+      service.register('a@b.edu', 'short'),
+      throwsA(isA<AccountFailure>()),
+    );
+    expect(auth.registrationCalls, 0);
+  });
+
+  test(
+    'registration maps duplicate, weak password and network failures',
+    () async {
+      final auth = StubAuth();
+      for (final code in [
+        'email-already-in-use',
+        'weak-password',
+        'network-request-failed',
+      ]) {
+        auth.failureCode = code;
+        await expectLater(
+          FirebaseAccountService(auth).register('a@b.edu', 'secret'),
+          throwsA(failure(FirebaseAccountService.messageFor(code))),
+        );
+      }
+    },
+  );
+
+  test('registration refuses missing identity', () async {
+    final auth = StubAuth()..result = null;
+    await expectLater(
+      FirebaseAccountService(auth).register('a@b.edu', 'secret'),
+      throwsA(isA<AccountFailure>()),
+    );
+  });
   test('SDK session events map restored user and signed-out state', () async {
     final auth = StubAuth()
       ..users = Stream.fromIterable([StubUser('restored', 'a@b.edu'), null]);

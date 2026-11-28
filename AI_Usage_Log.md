@@ -1,5 +1,13 @@
 # AI usage log
 
+## November 28 2026 — Registration flow
+
+Codex assisted with issue 7: the registration contract/SDK method, new-account validation, confirmation/mode UI and ten unit/widget checks. Used the official Firebase Flutter password-authentication guide linked in docs/Increment_09_Status.md. Accepted: separating new-account policy from existing sign-in, preserving password content and relying on auth events for identity. Rejected: interpreting a returned form result as a verified session or treating local stubs as native/cloud signup proof.
+
+Actual checks: the first full run exposed footer visibility and unsettled-scroll test failures; moved feedback above the form and corrected the helper waits. All 36 tests then passed and analysis was clean. Android inventory had no connected devices; no installed-device or student-learning result is claimed. No account records, provider or billing settings were changed by this increment.
+
+The Android debug APK compiled successfully with the new registration flow; no installation was performed.
+
 ## November 27 2026 — Email provider and live cloud check
 
 Codex assisted with issue 6: declaring/deploying email/password authentication and writing a separate guarded live REST smoke script. Reviewed the installed official Firebase CLI's auth provider deployment code and Firebase's official REST reference. Accepted: random disposable fictional accounts, in-memory credentials, explicit live-test opt-in and targeted cleanup. Rejected: claiming REST success proves native Flutter login/persistence, sending test reset emails or retaining credentials in logs.

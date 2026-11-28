@@ -18,7 +18,9 @@ class _SignInPageState extends State<SignInPage> {
   final form = GlobalKey<FormState>();
   final email = TextEditingController();
   final password = TextEditingController();
+  final confirmation = TextEditingController();
   bool busy = false;
+  bool creatingAccount = false;
   bool hidePassword = true;
   String? message;
 
@@ -26,6 +28,7 @@ class _SignInPageState extends State<SignInPage> {
   void dispose() {
     email.dispose();
     password.dispose();
+    confirmation.dispose();
     super.dispose();
   }
 
@@ -51,10 +54,12 @@ class _SignInPageState extends State<SignInPage> {
           message = 'If this address has an account, check your inbox for a reset link.';
         });
       } else {
-        final account = await widget.service.signIn(
-          email.text.trim(),
-          password.text,
-        );
+        final account = creatingAccount
+            ? await (widget.service as RegistrationService).register(
+                email.text.trim(),
+                password.text,
+              )
+            : await widget.service.signIn(email.text.trim(), password.text);
         if (!mounted) return;
         Navigator.of(context).pop(account);
       }
@@ -88,9 +93,15 @@ class _SignInPageState extends State<SignInPage> {
             Text(
               widget.service is UnconfiguredAccountService
                   ? 'Account setup preview. Firebase sign-in, Google sign-in and registration are not connected yet.'
-                  : 'Sign in with your email account. Registration and Google sign-in are coming next.',
+                  : creatingAccount
+                  ? 'Create an email account for your study days.'
+                  : 'Sign in with your email account. Google sign-in is coming next.',
             ),
             const SizedBox(height: 24),
+            if (message != null) ...[
+              Semantics(liveRegion: true, child: Text(message!)),
+              const SizedBox(height: 16),
+            ],
             Form(
               key: form,
               child: AutofillGroup(
@@ -114,7 +125,11 @@ class _SignInPageState extends State<SignInPage> {
                       controller: password,
                       enabled: !busy,
                       obscureText: hidePassword,
-                      autofillHints: const [AutofillHints.password],
+                      autofillHints: [
+                        creatingAccount
+                            ? AutofillHints.newPassword
+                            : AutofillHints.password,
+                      ],
                       enableSuggestions: false,
                       autocorrect: false,
                       onFieldSubmitted: (_) => submit(),
@@ -136,23 +151,70 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                         ),
                       ),
-                      validator: validateSignInPassword,
+                      validator: creatingAccount
+                          ? validateNewPassword
+                          : validateSignInPassword,
                     ),
+                    if (creatingAccount) ...[
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        key: const Key('account-confirmation'),
+                        controller: confirmation,
+                        enabled: !busy,
+                        obscureText: hidePassword,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        decoration: const InputDecoration(
+                          labelText: 'Confirm password',
+                        ),
+                        validator: (value) =>
+                            value != password.text ||
+                                value == null ||
+                                value.isEmpty
+                            ? 'Passwords must match.'
+                            : null,
+                        onFieldSubmitted: (_) => submit(),
+                      ),
+                    ],
                     const SizedBox(height: 24),
                     FilledButton(
                       onPressed: busy ? null : () => submit(),
-                      child: Text(busy ? 'Please wait…' : 'Sign in'),
+                      child: Text(
+                        busy
+                            ? 'Please wait…'
+                            : creatingAccount
+                            ? 'Create account'
+                            : 'Sign in',
+                      ),
                     ),
                     TextButton(
                       onPressed: busy ? null : () => submit(reset: true),
                       child: const Text('Reset password'),
                     ),
+                    if (widget.service is RegistrationService)
+                      TextButton(
+                        key: const Key('account-mode'),
+                        onPressed: busy
+                            ? null
+                            : () {
+                                form.currentState?.reset();
+                                password.clear();
+                                confirmation.clear();
+                                setState(() {
+                                  creatingAccount = !creatingAccount;
+                                  message = null;
+                                });
+                              },
+                        child: Text(
+                          creatingAccount
+                              ? 'Use an existing account'
+                              : 'Create an email account',
+                        ),
+                      ),
                   ],
                 ),
               ),
             ),
-            if (message != null)
-              Semantics(liveRegion: true, child: Text(message!)),
           ],
         ),
       ),

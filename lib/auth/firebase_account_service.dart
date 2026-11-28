@@ -2,10 +2,31 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'account_service.dart';
 
-class FirebaseAccountService implements SessionService {
+class FirebaseAccountService implements SessionService, RegistrationService {
   const FirebaseAccountService(this.auth);
 
   final FirebaseAuth auth;
+
+  @override
+  Future<Account> register(String email, String password) async {
+    final error = validateEmail(email) ?? validateNewPassword(password);
+    if (error != null) throw AccountFailure(error);
+    try {
+      final credential = await auth.createUserWithEmailAndPassword(
+        email: email.trim(),
+        password: password,
+      );
+      final user = credential.user;
+      if (user == null || user.uid.isEmpty) {
+        throw const AccountFailure(
+          'Account creation could not be confirmed. Try signing in.',
+        );
+      }
+      return Account(uid: user.uid, email: user.email ?? email.trim());
+    } on FirebaseAuthException catch (error) {
+      throw AccountFailure(messageFor(error.code));
+    }
+  }
 
   @override
   Stream<Account?> watchAccount() => auth.authStateChanges().map((user) {
@@ -59,6 +80,8 @@ class FirebaseAccountService implements SessionService {
   }
 
   static String messageFor(String code) => switch (code) {
+    'email-already-in-use' => 'Could not create the account. Try signing in or resetting your password.',
+    'weak-password' => 'Choose a stronger password.',
     'invalid-credential' ||
     'user-not-found' ||
     'wrong-password' ||

@@ -1,5 +1,7 @@
 # Firebase Auth integration handoff
 
+November 28 update: the account page now supports email registration through RegistrationService and the SDK's createUserWithEmailAndPassword method. It validates new-password length and confirmation, preserves existing sign-in policy, and continues to rely on auth events for Profile identity. The registration form/adapter are verified with explicit local test doubles; installed-device signup/login/persistence and Google sign-in remain open.
+
 November 27 update: email/password activation is deployed to the dedicated project. A guarded live REST smoke check passed password-boundary, account creation, denied/valid login, refresh and deletion checks, with disposable-account cleanup confirmed. No APK login or native persistence claim follows from this REST result. Registration UI, Google provider/flow, real reset delivery and installed-device verification remain open.
 
 The SDK adapter is lib/auth/firebase_account_service.dart. It requires an already initialized FirebaseAuth instance; constructing it does not create a project or enable a provider. Android main now initializes Firebase with a 15-second timeout and injects the adapter. Initialization failure selects the unconfigured service with a visible account-unavailable message. Default constructor injection remains unconfigured for preview tests.

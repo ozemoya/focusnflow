@@ -15,13 +15,18 @@ abstract interface class SessionService implements AccountService {
   Future<void> signOut();
 }
 
+abstract interface class RegistrationService implements AccountService {
+  Future<Account> register(String email, String password);
+}
+
 class AccountFailure implements Exception {
   const AccountFailure(this.message);
 
   final String message;
 }
 
-class UnconfiguredAccountService implements SessionService {
+class UnconfiguredAccountService
+    implements SessionService, RegistrationService {
   const UnconfiguredAccountService();
 
   static const message =
@@ -32,6 +37,11 @@ class UnconfiguredAccountService implements SessionService {
 
   @override
   Future<void> signOut() async {}
+
+  @override
+  Future<Account> register(String email, String password) async {
+    throw const AccountFailure(message);
+  }
 
   @override
   Future<Account> signIn(String email, String password) async {
@@ -56,4 +66,10 @@ String? validateEmail(String? value) {
 
 String? validateSignInPassword(String? value) {
   return value == null || value.isEmpty ? 'Enter your password.' : null;
+}
+
+String? validateNewPassword(String? value) {
+  if (value == null || value.isEmpty) return 'Enter a password.';
+  if (value.length < 6) return 'Use at least six characters.';
+  return null;
 }
